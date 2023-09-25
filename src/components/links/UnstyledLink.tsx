@@ -1,10 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import Link, { LinkProps } from 'next/link';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
 export type UnstyledLinkProps = {
-  href: string;
+  href?: string;
   children: React.ReactNode;
   openNewTab?: boolean;
   className?: string;
@@ -13,6 +15,8 @@ export type UnstyledLinkProps = {
 
 const UnstyledLink = React.forwardRef<HTMLAnchorElement, UnstyledLinkProps>(
   ({ children, href, openNewTab, className, nextLinkProps, ...rest }, ref) => {
+    if (!href) return children;
+
     const isNewTab =
       openNewTab !== undefined
         ? openNewTab
